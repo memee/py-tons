@@ -1,4 +1,8 @@
+from __future__ import unicode_literals
 import re
+
+from six import PY3
+
 
 camelcase_patt1 = re.compile('(.)([A-Z][a-z]+)')
 camelcase_patt2 = re.compile('([a-z0-9])([A-Z])')
@@ -20,6 +24,7 @@ def underscore_to_camelcase(name):
     :param name:
     :return:
     """
-    name = name.decode('utf-8')
+    if not PY3:
+        name = name.decode('utf-8')
     return "".join([n.capitalize() for n in name.split('_')])
 
